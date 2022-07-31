@@ -18,6 +18,34 @@ body {
   scroll-behavior: smooth;
 }
 
+.spinner {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(#fe734d 0 0) left/0% 100% no-repeat #dbdcef;
+  animation: progress-jgv380 2s infinite linear;
+}
+
+@keyframes progress-jgv380 {
+  100% {
+    background-size: 100% 100%;
+  }
+}
+
+.spinner2 {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: conic-gradient(#0000 10%, #fe734d);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
+  animation: spinner-zp9dbg 1s infinite linear;
+}
+
+@keyframes spinner-zp9dbg {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 @layer components {
   .mainContainer {
     @apply max-w-sm px-4 mx-auto;
@@ -45,9 +73,18 @@ body {
   .second {
     @apply p-2 shadow-card rounded-2xl text-gray-500 border border-gray-100;
   }
+  .down {
+    @apply bottom-4 absolute left-1/2 transform -translate-x-1/2 max-w-sm px-4;
+  }
 
   .outLine {
-    @apply w-full py-4 rounded-3xl text-gray-400    text-center border border-dashed border-gray-300 cursor-pointer active:bg-gray-50;
+    @apply w-full py-3 rounded-3xl text-gray-400    text-center border  border-gray-300 cursor-pointer active:bg-gray-50;
+  }
+  .outLineDashed {
+    @apply w-full py-3 rounded-3xl text-gray-400    text-center border border-dashed border-gray-300 cursor-pointer active:bg-gray-50;
+  }
+  .smallButton {
+    @apply border border-gray-200 py-2 px-4 rounded-2xl text-main-400 text-2xl active:bg-gray-50;
   }
 
   .menuItem {
@@ -61,5 +98,8 @@ body {
   }
   .divider {
     @apply border-b border-gray-200;
+  }
+  .topLine {
+    @apply border-t-2 border-main-400;
   }
 }

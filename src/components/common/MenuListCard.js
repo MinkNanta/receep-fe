@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function MenuListCard({ el }) {
+export default function MenuListCard({ el, onClick }) {
   const navigate = useNavigate();
 
   return (
     <div
-      onClick={() => navigate("/detail/" + el.id)}
+      onClick={onClick}
       key={el.id}
       className='border border-gray-100 rounded-xl shadow-card flex p-4 gap-4 w-full active:bg-gray-100'
     >

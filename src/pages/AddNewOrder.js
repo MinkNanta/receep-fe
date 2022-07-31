@@ -1,40 +1,139 @@
 import { ChevronLeftIcon, PlusSmIcon } from "@heroicons/react/outline";
+import axios from "../config/axios";
+import { useState } from "react";
 import Input from "../components/common/Input";
-import MenuCard from "../components/common/MenuCard";
+import OrderListCard from "../components/common/OrderListCard";
 import PageNavigate from "../components/common/PageNavigate";
+import SelectMenu from "./SelectMenu";
+import { useNavigate } from "react-router-dom";
+import { useOrder } from "../contexts/OrderContext";
+import Spinner from "../components/common/Spinner";
 
 export default function AddNewOrder() {
-  const cardItems = [
-    {
-      id: 1,
-      title: "53/2902 ซ.17/5",
-      item: "3",
-      create: "09:30",
-      icon: "🫖",
-      status: "upcoming",
-    },
-    {
-      id: 2,
-      title: "53/2902 ซ.17/5",
-      item: "2",
-      create: "09:30",
-      icon: "🎂",
-      status: "upcoming",
-    },
-  ];
+  const [select, setSelect] = useState(false);
+  const [errorDetail, setErrorDetail] = useState(false);
+  const [errorMenu, setErrorMenu] = useState(false);
+
+  const [oderDetail, setOderDetail] = useState("");
+  const [oderMenus, setOderMenus] = useState([]);
+  const [load, setLoad] = useState(false);
+
+  const handleDelete = (idx) => {
+    const newOrders = [...oderMenus];
+    newOrders.splice(idx, 1);
+    setOderMenus(newOrders);
+  };
+
+  const { getAllOrder } = useOrder();
+  const totalPrice = oderMenus.reduce((acc, el) => {
+    acc += el.price * 1;
+    return acc;
+  }, 0);
+  const totalCup = oderMenus.reduce((acc, el) => {
+    acc += el.totalItem * 1;
+    return acc;
+  }, 0);
+
+  const navigate = useNavigate();
+
+  const handelCreate = async () => {
+    try {
+      if (oderDetail == "") {
+        setErrorDetail(true);
+        return;
+      }
+
+      if (oderMenus.length < 1) {
+        setErrorMenu(true);
+        return;
+      }
+      setLoad(true);
+
+      const body = {};
+      body.detail = oderDetail;
+      body.total = totalCup;
+      body.orderItem = oderMenus;
+
+      const res = await axios.post("/order/create", body);
+      console.log(res.data.order.id);
+      getAllOrder();
+      navigate(`/detail/${res.data.order.id}`);
+      setLoad(false);
+    } catch (error) {
+      console.log(error.message);
+      setLoad(false);
+    }
+  };
+
   return (
-    <div className='mainContainer space-y-6 border-t-2 border-main-400'>
-      <PageNavigate title='Add new order' />
-      <Input label='order detail' placeholder='Your order detail' />
-      {cardItems.map((el) => (
-        <MenuCard el={el} />
-      ))}
-      <div className=' outLine'>
-        <PlusSmIcon className='w-5 h-5 text-main-400 m-auto' /> add more
-      </div>
-      <button className='primary bottom-6 fixed max-w-sm'>
-        create new order
-      </button>
-    </div>
+    <>
+      {load && <Spinner />}
+
+      <div className='topLine'></div>
+      {!select ? (
+        <div className='mainContainer space-y-6 '>
+          <PageNavigate title='Add new order' to='/' />
+          <div className='border border-gray-100 rounded-xl shadow-card  p-4 gap-4 w-full active:bg-gray-100 space-y-3'>
+            <input
+              className='block bg-white 
+             py-4 text-2xl font-semibold w-full text-gray-900 
+            placeholder-gray-400 outline-none 
+            '
+              value={oderDetail}
+              onChange={(e) => {
+                setOderDetail(e.target.value);
+                setErrorDetail(false);
+              }}
+              name='detail'
+              label='order detail'
+              placeholder='Your order detail'
+            />
+            {errorDetail && (
+              <p className='text-xs text-red-400'>please input the detail</p>
+            )}
+
+            {oderMenus.map((el, idx) => (
+              <OrderListCard el={el} onClick={() => handleDelete(idx)} />
+            ))}
+            {!oderMenus.length ? (
+              ""
+            ) : (
+              <div className='flex justify-between gap-4 items-center'>
+                <p className='text-sm text-gray-400 '>Total</p>
+                <p className='text-sm text-main-400 '>{totalPrice} THB</p>
+              </div>
+            )}
+
+            <div
+              className='w-full py-2 rounded-3xl 
+              bg-gray-50
+              text-gray-400  text-center text-base  cursor-pointer active:bg-gray-50'
+              onClick={() => {
+                setSelect(true);
+                setErrorMenu(false);
+              }}
+            >
+              <PlusSmIcon className='w-4 text-main-400 m-auto inline-flex mx-1' />
+              add menu
+            </div>
+            {errorMenu && (
+              <p className='text-xs text-red-400'>please select menu</p>
+            )}
+          </div>
+          <button className=' text-blue-400 text-sm '>+ more order</button>
+
+          <button className='primary down' onClick={handelCreate}>
+            create new order
+          </button>
+        </div>
+      ) : (
+        <SelectMenu
+          select={select}
+          setSelect={setSelect}
+          oderMenus={oderMenus}
+          setOderMenus={setOderMenus}
+        />
+      )}
+    </>
   );
 }

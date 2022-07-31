@@ -9,6 +9,7 @@ export default function NavigateBar() {
     { title: "menu", icon: "📖", to: "/menu" },
     { title: "all order", icon: "🧾", to: "/order" },
     { title: "add order", icon: "🛎", to: "/add-order" },
+    { title: "user", icon: " 🧑‍💼", to: "/user" },
   ];
 
   return (
