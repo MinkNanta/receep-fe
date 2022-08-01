@@ -59,9 +59,9 @@ export default function OrderDetail() {
   return (
     <>
       {load && <Loading />}
-      <div className='topLine'></div>
-      <div className='mainContainer space-y-4 '>
-        <div className='flex justify-between mt-4 items-center'>
+      {/* <div className='topLine'></div> */}
+      <div className='mainContainer space-y-4 pt-6 pb-12'>
+        <div className='flex justify-between items-center'>
           <p className='text-gray-500' onClick={() => navigate("/")}>
             {"<"} Order detail
           </p>
@@ -88,11 +88,11 @@ export default function OrderDetail() {
         {OrderItems?.map((el) => (
           <div className='divider' key={el.id}>
             <div className='grid grid-cols-4  gap-4 w-full items-start'>
-              <h1 className='text-2xl font-semibold w-full col-span-3 '>
+              <h1 className='text-3xl font-semibold w-full col-span-3 '>
                 {el.title}
                 <span className='text-main-400'> X{el.totalItem}</span>
               </h1>
-              <p className='text-base font-semibold self-end text-main-400 w-full h-full text-right'>
+              <p className='text-2xl font-semibold self-end text-main-400 w-full h-full text-right'>
                 {el.price} THB
               </p>
             </div>
@@ -102,11 +102,11 @@ export default function OrderDetail() {
           </div>
         ))}
         <div className='flex justify-between'>
-          <p className='text-base font-semibold'>
+          <p className='text-2xl font-semibold'>
             Total
             <span className='text-main-400'> X {totalItem}</span>
           </p>
-          <p className='text-base font-semibold text-main-400'>
+          <p className='text-2xl font-semibold text-main-400'>
             {totalPrice} THB
           </p>
         </div>
