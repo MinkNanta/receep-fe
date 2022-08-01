@@ -88,6 +88,9 @@ export default function SignIn() {
         <button className='primary ' onClick={handleSubmitSignIn}>
           Sign in
         </button>
+        <p className=' text-center text-gray-400 py-6'>
+          contact for more information at <br /> 084 622 9466
+        </p>
       </div>
     </>
   );
