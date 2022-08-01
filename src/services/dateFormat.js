@@ -5,6 +5,8 @@ export default function dateFormat(date) {
     day: "numeric",
     month: "long",
     year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
   });
   return result.split(",");
 }

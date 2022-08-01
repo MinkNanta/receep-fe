@@ -81,8 +81,12 @@ export default function OrderDetail() {
             src='https://res.cloudinary.com/ddanca5ma/image/upload/v1659323486/281621450_1053193748620986_6667166600274955983_n_lwtxae.jpg'
             className='h-[180px] m-auto p-4'
           />
-          <h1 className='text-2xl font-semibold text-center'>{detail}</h1>
-          <p className='text-gray-500 text-center'>{dateFormat(createdAt)}</p>
+          <h1 className='text-3xl font-semibold text-center w-full'>
+            {detail}
+          </h1>
+          <p className='text-[22px] text-gray-500 text-center'>
+            {dateFormat(createdAt)}
+          </p>
         </div>
         <div className='divider'></div>
         {OrderItems?.map((el) => (
