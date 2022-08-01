@@ -48,7 +48,7 @@ body {
 
 @layer components {
   .mainContainer {
-    @apply max-w-sm px-4 mx-auto;
+    @apply px-4 mx-auto max-w-3xl;
   }
   .title {
     @apply text-4xl pt-12 text-gray-900 font-semibold;
