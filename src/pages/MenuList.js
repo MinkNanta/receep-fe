@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/common/Loading";
 import MenuListCard from "../components/common/MenuListCard";
+import NavigateBar from "../components/common/NavigateBar";
 import PageNavigate from "../components/common/PageNavigate";
 import { useMenu } from "../contexts/MenuContext";
 
@@ -104,6 +105,7 @@ export default function MenuList() {
             ))
         )}
       </div>
+      <NavigateBar />
     </>
   );
 }

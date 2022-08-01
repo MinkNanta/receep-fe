@@ -17,6 +17,7 @@ export default function AddNewOrder() {
   const [oderDetail, setOderDetail] = useState("");
   const [oderMenus, setOderMenus] = useState([]);
   const [load, setLoad] = useState(false);
+  const [change, setChange] = useState(false);
 
   const handleDelete = (idx) => {
     const newOrders = [...oderMenus];
@@ -40,6 +41,7 @@ export default function AddNewOrder() {
     try {
       if (oderDetail == "") {
         setErrorDetail(true);
+        setChange(false);
         return;
       }
 
@@ -48,7 +50,6 @@ export default function AddNewOrder() {
         return;
       }
       setLoad(true);
-
       const body = {};
       body.detail = oderDetail;
       body.total = totalCup;
@@ -72,11 +73,12 @@ export default function AddNewOrder() {
       {!select ? (
         <div className='mainContainer space-y-6 h-screen'>
           <PageNavigate title='Add new order' to='/' />
-          <div className='border border-gray-100 rounded-xl shadow-card  p-4 gap-4 w-full active:bg-gray-100 space-y-3 h-[72%] overflow-auto'>
+          <div className='border border-gray-100 rounded-xl shadow-card  p-4 gap-4 w-full active:bg-gray-100 space-y-3 overflow-auto'>
             <Input
               value={oderDetail}
               onChange={(e) => {
                 setOderDetail(e.target.value);
+                setChange(true);
                 setErrorDetail(false);
               }}
               name='detail'
@@ -112,11 +114,17 @@ export default function AddNewOrder() {
               <p className='text-xs text-red-400'>please select menu</p>
             )}
           </div>
-          {/* <button className=' text-blue-400 text-sm '>+ more order</button> */}
+          {change ? (
+            <button className='primary' onClick={handelCreate}>
+              create order
+            </button>
+          ) : (
+            <button className='primary' disabled onClick={handelCreate}>
+              create order
+            </button>
+          )}
 
-          <button className='primary down ' onClick={handelCreate}>
-            create order
-          </button>
+          {/* <button className=' text-blue-400 text-sm '>+ more order</button> */}
         </div>
       ) : (
         <SelectMenu
