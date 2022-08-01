@@ -2,6 +2,7 @@ import { PlusSmIcon } from "@heroicons/react/outline";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/common/Input";
+import Loading from "../components/common/Loading";
 import MenuListCard from "../components/common/MenuListCard";
 import PageNavigate from "../components/common/PageNavigate";
 import { useMenu } from "../contexts/MenuContext";
@@ -21,6 +22,7 @@ export default function SelectMenu({
     sweet: "0%",
     note: "",
   });
+  const [load, setLoad] = useState(false);
 
   const [totalItem, setTotalItem] = useState(1);
 
@@ -32,9 +34,15 @@ export default function SelectMenu({
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        setLoad(true);
+
         getAllMenu();
-        getAllCategory();
+        const res = await getAllCategory();
+        setTap(res[0].id);
+        setLoad(false);
       } catch (error) {
+        setLoad(false);
+
         console.log(error.message);
       }
     };
@@ -59,6 +67,8 @@ export default function SelectMenu({
     <>
       {step === 1 && (
         <>
+          {load && <Loading />}
+
           <div
             className='mainContainer space-y-6 '
             onClick={() => setSelect(false)}

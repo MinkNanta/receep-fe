@@ -5,7 +5,7 @@ export default function Loading() {
   // {load && <Loading />}
   return (
     <div className='bg-white absolute inset-0 z-50 h-full'>
-      <div class='spinner m-auto h-full w-full'></div>
+      <div className='spinner m-auto h-full w-full'></div>
     </div>
   );
 }

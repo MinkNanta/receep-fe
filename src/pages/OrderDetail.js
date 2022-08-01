@@ -34,7 +34,7 @@ export default function OrderDetail() {
         setTotalItem(totalItem);
         setLoad(false);
       } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
         setLoad(false);
       }
     };
@@ -51,43 +51,48 @@ export default function OrderDetail() {
       getOrderById(id);
       setLoadStatus(false);
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
     }
   };
 
-  console.log(orderById);
+  // console.log(orderById);
   return (
     <>
       {load && <Loading />}
       <div className='topLine'></div>
-
       <div className='mainContainer space-y-4 '>
         <div className='flex justify-between mt-4 items-center'>
-          <p className='text-gray-500'>Order detail</p>
+          <p className='text-gray-500' onClick={() => navigate("/")}>
+            {"<"} Order detail
+          </p>
 
           <button className='second' onClick={() => handelUpdateStatus()}>
             {loadStatus ? (
               <p className=' text-gray-400 '>⌛ updating...</p>
             ) : orderById.status === "upcoming" ? (
-              "🧑🏼‍🍳 Done"
+              <p className='text-gray-400'>order</p>
             ) : (
               "🛵 Send"
             )}
           </button>
         </div>
         <div>
-          <h1 className='text-2xl font-semibold'>{detail}</h1>
-          <p className='text-gray-500'>{dateFormat(createdAt)}</p>
+          <img
+            src='https://res.cloudinary.com/ddanca5ma/image/upload/v1659323486/281621450_1053193748620986_6667166600274955983_n_lwtxae.jpg'
+            className='h-[180px] m-auto p-4'
+          />
+          <h1 className='text-2xl font-semibold text-center'>{detail}</h1>
+          <p className='text-gray-500 text-center'>{dateFormat(createdAt)}</p>
         </div>
         <div className='divider'></div>
         {OrderItems?.map((el) => (
-          <div className='divider'>
-            <div className='flex justify-between'>
-              <h1 className='text-2xl font-semibold'>
+          <div className='divider' key={el.id}>
+            <div className='grid grid-cols-4  gap-4 w-full items-start'>
+              <h1 className='text-2xl font-semibold w-full col-span-3 '>
                 {el.title}
                 <span className='text-main-400'> X{el.totalItem}</span>
               </h1>
-              <p className='text-base font-semibold self-end text-main-400'>
+              <p className='text-base font-semibold self-end text-main-400 w-full h-full text-right'>
                 {el.price} THB
               </p>
             </div>
@@ -105,9 +110,6 @@ export default function OrderDetail() {
             {totalPrice} THB
           </p>
         </div>
-        <button className='w-full second down' onClick={() => navigate("/")}>
-          home
-        </button>
       </div>
     </>
   );

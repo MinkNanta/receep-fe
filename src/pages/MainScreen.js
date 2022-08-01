@@ -33,8 +33,6 @@ export default function MainScreen() {
     fetchUser();
   }, []);
 
-  console.log(allOrder, category);
-
   return (
     <>
       {load && <Loading />}
@@ -46,11 +44,24 @@ export default function MainScreen() {
         </div>
       </div>
       <div className='mainContainer space-y-4'>
-        {allOrder
-          .filter((fl) => fl.status === tap)
-          .map((el) => (
-            <MenuCard el={el} category={category} />
-          ))}
+        {allOrder.filter((fl) => fl.status === tap).length === 0 ? (
+          tap === "upcoming" ? (
+            <button
+              className='outLineDashed py-8'
+              onClick={() => navigate("/add-order")}
+            >
+              + create new order
+            </button>
+          ) : (
+            <p className='text-center w-full text-gray-400 pt-6'>
+              Empty order!
+            </p>
+          )
+        ) : (
+          allOrder
+            .filter((fl) => fl.status === tap)
+            .map((el) => <MenuCard el={el} category={category} key={el.id} />)
+        )}
       </div>
       <NavigateBar />
     </>

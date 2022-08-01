@@ -6,6 +6,7 @@ export default function Tap({ active, setActive }) {
     <div className='flex border p-1 rounded-3xl'>
       {tapItems.map((el) => (
         <div
+          key={el}
           className={active === el ? "tapActive" : "tapInactive"}
           onClick={() => setActive(el)}
         >

@@ -9,6 +9,8 @@ import AddNewMenu from "../pages/AddNewMenu";
 import AddNewCategory from "../pages/AddNewCategory";
 import { useAuth } from "../contexts/AuthContext";
 import User from "../pages/User";
+import MenuDetail from "../pages/MenuDetail";
+import AllCategory from "../pages/AllCategory";
 
 export default function Router() {
   const { user } = useAuth();
@@ -24,6 +26,8 @@ export default function Router() {
           <Route path='/create-menu' element={<AddNewMenu />} />
           <Route path='/add-new-category' element={<AddNewCategory />} />
           <Route path='/user' element={<User />} />
+          <Route path='/menu-detail/:id' element={<MenuDetail />} />
+          <Route path='/all-category' element={<AllCategory />} />
           <Route path='*' element={<MainScreen />} />
         </>
       ) : (

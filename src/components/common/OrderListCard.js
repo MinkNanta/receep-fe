@@ -32,7 +32,7 @@ export default function OrderListCard({ el, onClick }) {
               onClick={onClick}
             /> */}
             <p
-              className='text-[12px] text-orange-400 my-auto  underline'
+              className='text-[12px] text-red-400 my-auto  underline'
               onClick={onClick}
             >
               delete

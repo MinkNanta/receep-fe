@@ -53,14 +53,13 @@ export default function AddNewOrder() {
       body.detail = oderDetail;
       body.total = totalCup;
       body.orderItem = oderMenus;
-
       const res = await axios.post("/order/create", body);
-      console.log(res.data.order.id);
+      // console.log(res.data.order.id);
       getAllOrder();
       navigate(`/detail/${res.data.order.id}`);
       setLoad(false);
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       setLoad(false);
     }
   };
@@ -71,14 +70,10 @@ export default function AddNewOrder() {
 
       <div className='topLine'></div>
       {!select ? (
-        <div className='mainContainer space-y-6 '>
+        <div className='mainContainer space-y-6 h-screen'>
           <PageNavigate title='Add new order' to='/' />
-          <div className='border border-gray-100 rounded-xl shadow-card  p-4 gap-4 w-full active:bg-gray-100 space-y-3'>
-            <input
-              className='block bg-white 
-             py-4 text-2xl font-semibold w-full text-gray-900 
-            placeholder-gray-400 outline-none 
-            '
+          <div className='border border-gray-100 rounded-xl shadow-card  p-4 gap-4 w-full active:bg-gray-100 space-y-3 h-[72%] overflow-auto'>
+            <Input
               value={oderDetail}
               onChange={(e) => {
                 setOderDetail(e.target.value);
@@ -86,28 +81,25 @@ export default function AddNewOrder() {
               }}
               name='detail'
               label='order detail'
-              placeholder='Your order detail'
+              placeholder=''
             />
             {errorDetail && (
-              <p className='text-xs text-red-400'>please input the detail</p>
+              <p className='text-xs text-red-400'>* Please input the detail</p>
             )}
-
             {oderMenus.map((el, idx) => (
               <OrderListCard el={el} onClick={() => handleDelete(idx)} />
             ))}
             {!oderMenus.length ? (
               ""
             ) : (
-              <div className='flex justify-between gap-4 items-center'>
+              <div className='flex justify-between gap-4 items-center pb-2'>
                 <p className='text-sm text-gray-400 '>Total</p>
                 <p className='text-sm text-main-400 '>{totalPrice} THB</p>
               </div>
             )}
 
             <div
-              className='w-full py-2 rounded-3xl 
-              bg-gray-50
-              text-gray-400  text-center text-base  cursor-pointer active:bg-gray-50'
+              className='outLineDashed'
               onClick={() => {
                 setSelect(true);
                 setErrorMenu(false);
@@ -120,10 +112,10 @@ export default function AddNewOrder() {
               <p className='text-xs text-red-400'>please select menu</p>
             )}
           </div>
-          <button className=' text-blue-400 text-sm '>+ more order</button>
+          {/* <button className=' text-blue-400 text-sm '>+ more order</button> */}
 
-          <button className='primary down' onClick={handelCreate}>
-            create new order
+          <button className='primary down ' onClick={handelCreate}>
+            create order
           </button>
         </div>
       ) : (

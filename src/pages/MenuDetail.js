@@ -1,33 +1,30 @@
 import { PlusSmIcon } from "@heroicons/react/outline";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Input from "../components/common/Input";
 import PageNavigate from "../components/common/PageNavigate";
 import { useMenu } from "../contexts/MenuContext";
 import axios from "../config/axios";
 import Spinner from "../components/common/Spinner";
 
-export default function AddNewMenu() {
-  const {
-    getAllCategory,
-    category,
-    setMenuById,
-    menuById,
-    newMenu,
-    setNewMenu,
-  } = useMenu();
+export default function MenuDetail() {
+  const { getAllCategory, category, setMenuById, menuById } = useMenu();
   const [load, setLoad] = useState(false);
 
   const [errorTitle, setErrorTitle] = useState(false);
   const [errorDes, setErrorDes] = useState(false);
   const [errorPrice, setErrorPrice] = useState(false);
-
+  const [change, setChange] = useState(false);
   const navigate = useNavigate();
+  const { id } = useParams();
 
+  const [newMenu, setNewMenu] = useState({});
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        getAllCategory();
+        const res = await axios.get(`/menu/getMenuById/${id}`);
+        // setMenuDetail(res.data);
+        setNewMenu(res.data);
       } catch (error) {
         // console.log(error.message);
       }
@@ -36,12 +33,13 @@ export default function AddNewMenu() {
   }, []);
 
   const handleChangeInput = (event) => {
+    setChange(true);
     const values = { ...newMenu };
     values[event.target.name] = event.target.value;
     setNewMenu(values);
   };
 
-  const handleSubmitMenu = async () => {
+  const handleUpdate = async () => {
     try {
       if (!newMenu.title) {
         setErrorTitle(true);
@@ -58,7 +56,7 @@ export default function AddNewMenu() {
 
       setLoad(true);
 
-      const res = await axios.post("/menu/create", newMenu);
+      const res = await axios.patch(`/menu/updateMenu/${id}`, newMenu);
       setMenuById(res.data);
 
       navigate("/menu");
@@ -69,6 +67,20 @@ export default function AddNewMenu() {
       setErrorTitle(false);
       setErrorDes(false);
       setErrorPrice(false);
+
+      // console.log(error.message);
+    }
+  };
+  const handleDelete = async () => {
+    try {
+      console.log(id);
+      setLoad(true);
+
+      await axios.delete(`/menu/${id}`);
+      navigate("/menu");
+      setLoad(false);
+    } catch (error) {
+      setLoad(false);
 
       // console.log(error.message);
     }
@@ -137,16 +149,21 @@ export default function AddNewMenu() {
             </option>
           ))}
         </select>
-        <button
-          className=' text-blue-400 text-sm'
-          onClick={() => navigate("/add-new-category")}
-        >
-          + new category
+        <div className='mt-4 space-y-6'>
+          {change ? (
+            <button className='primary' onClick={handleUpdate}>
+              save
+            </button>
+          ) : (
+            <button className='primary' disabled onClick={handleUpdate}>
+              save
+            </button>
+          )}
+        </div>
+        <button className='outLine' onClick={handleDelete}>
+          delete
         </button>
       </div>
-      <button className='primary down ' onClick={handleSubmitMenu}>
-        save
-      </button>
     </>
   );
 }

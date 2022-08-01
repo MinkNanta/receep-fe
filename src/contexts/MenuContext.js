@@ -20,7 +20,7 @@ function MenuContextProvider({ children }) {
   const navigate = useNavigate();
 
   const [newMenu, setNewMenu] = useState({
-    category: "1",
+    category: "",
     title: "",
     description: "",
     price: "",
@@ -37,7 +37,9 @@ function MenuContextProvider({ children }) {
   const getAllCategory = async (body) => {
     try {
       const res = await axios.get("/menu/getCategory");
+      setNewMenu((p) => ({ ...p, category: res.data[0]?.id }));
       setCategory(res.data);
+      return res.data;
     } catch (error) {
       console.log(error.message);
     }

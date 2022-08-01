@@ -6,14 +6,16 @@ import {
 } from "../services/localStorage";
 import axios from "../config/axios";
 import { useNavigate } from "react-router";
+import { useError } from "./ErrorContext";
 
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [fetch, setFetch] = useState(false);
-  const [userName, setUserName] = useState(null);
+  // const [userName, setUserName] = useState(null);
   const navigate = useNavigate();
+  const { setError } = useError();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -28,6 +30,7 @@ function AuthContextProvider({ children }) {
       } catch (error) {
         removeAccessToken();
         navigate("/main");
+        setError(error.message);
       }
     };
     fetchUser();
@@ -46,19 +49,14 @@ function AuthContextProvider({ children }) {
 
   const signIn = async (body) => {
     try {
-      console.log(body);
       const res = await axios.post("/signin", body);
       setAccessToken(res.data.token);
       setUser(res.data.token);
+      setFetch((p) => !p);
     } catch (error) {
+      setError(error.message);
       console.log(error.message);
     }
-  };
-
-  const signOut = () => {
-    removeAccessToken();
-    setUser(null);
-    navigate("/");
   };
 
   return (
@@ -66,10 +64,7 @@ function AuthContextProvider({ children }) {
       value={{
         user,
         setUser,
-        signOut,
         signIn,
-        userName,
-        // error,
       }}
     >
       {children}
