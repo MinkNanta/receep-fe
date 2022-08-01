@@ -88,26 +88,26 @@ export default function OrderDetail() {
         {OrderItems?.map((el) => (
           <div className='divider' key={el.id}>
             <div className='grid grid-cols-4  gap-4 w-full items-start'>
-              <h1 className='text-3xl font-semibold w-full col-span-3 '>
+              <h1 className='text-[28px] font-semibold w-full col-span-3 '>
                 {el.title}
                 <span className='text-main-400'> X{el.totalItem}</span>
               </h1>
-              <p className='text-2xl font-semibold self-end text-main-400 w-full h-full text-right'>
-                {el.price} THB
+              <p className='text-[22px] font-semibold self-end text-main-400 w-full h-full text-right'>
+                {el.price} ฿
               </p>
             </div>
-            <p>sweet: {el.sweet}</p>
-            {el.note && <p>note: {el.note}</p>}
+            <p className='text-lg'>sweet: {el.sweet}</p>
+            {el.note && <p className='text-lg'>note: {el.note}</p>}
             <div className='h-4'></div>
           </div>
         ))}
         <div className='flex justify-between'>
-          <p className='text-2xl font-semibold'>
+          <p className='text-[22px] font-semibold'>
             Total
             <span className='text-main-400'> X {totalItem}</span>
           </p>
-          <p className='text-2xl font-semibold text-main-400'>
-            {totalPrice} THB
+          <p className='text-[22px] font-semibold text-main-400'>
+            {totalPrice} ฿
           </p>
         </div>
       </div>
