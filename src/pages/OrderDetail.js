@@ -78,7 +78,7 @@ export default function OrderDetail() {
         </div>
         <div>
           <img
-            src='https://res.cloudinary.com/ddanca5ma/image/upload/v1659323486/281621450_1053193748620986_6667166600274955983_n_lwtxae.jpg'
+            src='https://lh3.googleusercontent.com/fife/AAbDypAOEizJwMVUZiW9qAmStf94Tq2SUR8kANIZplBNQG-DkObG2r0c2IR29cYrcw1MmClXYsBElh_TiTkYQ5JuziRyxGVb6knrH2ha6_9l2asmQ-OfChuhwSNJWozQuxnIRB-E-0kfNbx9FV4leIgXiRz0D86vBltQDEg_S_m-W-NZTC5Jf7SBcsQSum54QJ6ZSaIFJ7m-ECUux3QHJdH7YNmtIaRIQEDDhjGJk0z1vMMMjRM7s-NWVtekgyA_6jD-IMruq3oVDK9PlsbiItLCRAUEOd9pP3A6eXtmdIDpPnjwqHOXgKtzb1dEX8AukrodnpidPLInFXOMZjLXYx8LqAbXuXFtSO0GQU2DF3KLqSbBKwqsDdrS2qqUGxJhvk8PfmNNQfzcykk_3EUGkm4rwhFKLE1eIy92fKbv2wyMK7I7st6Kes-0P1l7__8YkY0MAFwd_a8WCP1MSri_ZG0CBbxetJowD_vZisk5bglrpUOwZYqFsskjLc8wQ4dMKK0LV5dvJclcpKvRHdb3yp5Uihl8zhRf_RzNwzGWKuLhDMnOLi7ZHLdVlRtmrkRolIZR4emQs1mribtndzZLX6NZ8hyjP7pE6YzgTZGEAnLKEYCndrW_8KCDUeWjED1nqF_8xmpzof8UjxUSKTEuCZduVkFYSSUbZ7xuRVUcKHmAUaQ0gY1-BdCQL37U-lb-pYHnDK7JRANBd0j6V4Aj1UXSe9lhJm6I71dF9xOHtjtDgSe4FwY5um8YXdPS6CLzEuElhIs9wow0hqyh-JPAWlJTg-Xo0rZDPI0WpuDKGC3wZYsuz50pCBflyVoAGTXu2_yHvgdylgfNzRSJmrkwoAXzPgI-z2u7PWtU0WFCqLZyaRLb3umFtImJp2r4i7UV29DCEQwcjub295pWjM5OMCUXJp0j_Fkr5SDp0LkQ1fdA6gDtIiyaxLssZFRSEI0Gjkk0njjBnXZCG_fCgFZ9gwQKu_Q3God09HPt84GYe_OEVxV3B-Bjt3zd0wvJkRBUQuS43JDoYJp22rOMFLz0CALF-DvpyD-wNxOWsQbB8-oJGbKtQKtHuV4owlkUhxYo8J-axfTSxIThYIPwC-BDD_cqRyAP0HSDamwixucE5_XnsNsSQu5au4h4VK6kI9JU-B6QV5n-YUquGMgrxqq1f3taLPkoni5ZrIMLyJk1EHuPuep-OiRAxEf8ZZFYwwqt5ilGQPmeVyV301DqSybYbj84BT6BX4Lmcb-A01_SSKhD4Nn5ZlnoOPACOzzVcqqukrgiEyWo19db-Q=w2270-h1474'
             className='h-[180px] m-auto p-4'
           />
           <h1 className='text-3xl font-semibold text-center w-full'>
